@@ -1,0 +1,22 @@
+name: basom-acoustics
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - soundfile
+  - libsndfile
+  - librosa
+  - scikit-learn
+  - pip
+
+  - pip:
+      - opensoundscape==0.12
+      - praat-parselmouth
+      - umap-learn
+      - hdbscan
