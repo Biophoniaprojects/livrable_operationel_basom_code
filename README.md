@@ -153,7 +153,7 @@ Commande typique pour le puffin de scopoli :
 python scripts/run_species_presence.py \
     --input-dir data/2025 \
     --output-dir outputs/2025_presence_puffin \
-    --classifier models/presence_detection/puffin_model.tflite
+    --classifier models/birdnet_calonectris_CustomClassifier_bandpassed_350_5000_Labels.tflite
 ```
 
 Mode test :
@@ -161,7 +161,7 @@ Mode test :
 python scripts/run_species_presence.py \
     --input-dir data/2025 \
     --output-dir outputs/test_presence \
-    --classifier models/presence_detection/oceanite_model.tflite \
+    --classifier models/birdnet_calonectris_CustomClassifier_bandpassed_350_5000_Labels.tflite \
     --stations RO1 \
     --debug \
     --debug-max-files 3
@@ -211,7 +211,7 @@ Le workflow comprend les étapes suivantes :
 python scripts/run_oceanite_abundance.py \
     --input-dir data/2025 \
     --output-dir outputs/2025_oceanite_abundance \
-    --classifier models/oceanite_abundance/best.model \
+    --classifier models/purring_call_detector.model \
     --date-start 2025-05-01 \ #début mai = début période de ponte
     --date-end 2025-06-15 \ # mi juin = fin de période de ponte
     --start-hour 0 \ # Entre minuit et 3h correspond la période d'activité nocturne maximale 
@@ -224,7 +224,7 @@ Mode test :
 python scripts/run_oceanite_abundance.py \
     --input-dir data/2025 \
     --output-dir outputs/test_oceanite_abundance \
-    --classifier models/oceanite_abundance/best.model \
+    --classifier models/purring_call_detector.model \
     --stations RO1 \
     --date-start 2025-05-01 \
     --date-end 2025-06-15 \
@@ -293,6 +293,7 @@ Les trois outils principaux sont :
 > **Important**  
 > Ce workflow combine des traitements automatiques et une étape manuelle de validation / segmentation.  
 > La qualité des annotations influence directement les résultats des étapes suivantes.
+> L'executable puffin_segmentation_gui étant trop volumineux pour être deposé sur github, il peut être téléchargeable avec le lien suivant : [lien](https://biophoniacorse.sharepoint.com/:u:/r/sites/BioPhonia/Shared%20Documents/basom/4-Data/puffin_segmentation_gui.exe?csf=1&web=1&e=OHXF5s). En cas de problème pour le téléchargement contacter : contact@biophonia.fr
 
 ### Sorties
 
@@ -318,7 +319,7 @@ Cas standard :
 python scripts/run_puffin_candidate_selection.py \
     --input-dir data/2025 \
     --output-dir outputs/2025_puffin_candidates \
-    --presence-classifier models/presence_detection/puffin_birdnet.tflite \
+    --presence-classifier models/birdnet_calonectris_CustomClassifier_bandpassed_350_5000_Labels.tflite \
     --date-start 2025-05-15 \
     --date-end 2025-06-15
 ```
@@ -340,7 +341,7 @@ Avec stations ciblées :
 python scripts/run_puffin_candidate_selection.py \
     --input-dir data/2025 \
     --output-dir outputs/2025_puffin_candidates \
-    --presence-classifier models/presence_detection/puffin_birdnet.tflite \
+    --presence-classifier models/birdnet_calonectris_CustomClassifier_bandpassed_350_5000_Labels.tflite \
     --stations ST01 ST02 \
     --date-start 2025-05-15 \
     --date-end 2025-06-15
@@ -447,25 +448,14 @@ python scripts/run_puffin_abundance_estimation.py \
 - estimation du nombre de nids par station
 
 ## 8. Bonnes pratiques
-- conserver les données audio brutes sans modification ;
-- travailler dans un dossier de sortie dédié ;
-tester le pipeline sur une ou deux stations avant lancement complet ;
-- homogénéiser les conventions de segmentation entre annotateurs ;
+- conserver les données audio brutes sans modification
+- travailler dans un dossier de sortie dédié
+tester le pipeline sur une ou deux stations avant lancement complet
+- homogénéiser les conventions de segmentation entre annotateurs
 - conserver la trace des paramètres utilisés pour le clustering et l’estimation finale.
 
 ## 9. Points de vigilance
-- la qualité de la segmentation manuelle influence directement les features calculées ;
-- les résultats de clustering dépendent des paramètres choisis ;
-- l’estimation finale du nombre de nids doit être interprétée dans le cadre de calibration du modèle ;
+- la qualité de la segmentation manuelle influence directement les features calculées
+- les résultats de clustering dépendent des paramètres choisis
+- l’estimation finale du nombre de nids doit être interprétée dans le cadre de calibration du modèle
 - les comparaisons entre stations ou entre années doivent être faites avec prudence si le protocole change.
-
-## TODO
-- nom exact du classifieur de présélection
-- règles exactes de sélection des vocalisations
-- format exact des annotations manuelles
-- raccourcis et consignes de l’interface graphique
-- features utilisées
-- paramètres UMAP / clustering
-- forme du modèle négatif binomial
-- Comment recalculer ces paramètres avec données terrains
-- noms définitifs des fichiers de sortie
