@@ -391,11 +391,6 @@ L’interface `puffin_segmentation_gui` permet de :
 
 Elle sert notamment à écarter les faux positifs, les vocalisations non mâles, et les extraits de qualité insuffisante.
 
-Pour valider un extrait : [AJOUTER ICI L’ACTION CONCRÈTE]  
-Pour rejeter un extrait : [AJOUTER ICI L’ACTION CONCRÈTE]  
-Pour segmenter une vocalisation : [AJOUTER ICI L’ACTION CONCRÈTE]  
-Pour ajouter un commentaire : [AJOUTER ICI L’ACTION CONCRÈTE]  
-Pour écouter l’extrait : [AJOUTER ICI L’ACTION CONCRÈTE]
 
 **Sortie attendue**
 A la fin de l'annotation le dossier de sortie doit ressembler à cela : 
